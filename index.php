@@ -13,6 +13,12 @@ function addEmployee($roster) {
     $type = (int) readline("Enter your choice: ");
 
     $employeeNumber = (int) readline("Enter employee number: ");
+
+    if ($roster->employeeExists($employeeNumber)) {
+        echo "Employee no. $employeeNumber is already used.\n";
+        return;
+    }
+
     $name = readline("Enter employee name: ");
 
     switch ($type) {
@@ -48,7 +54,7 @@ function addEmployee($roster) {
 }
 
 function displayMenu() {
-    echo "\nMenu:\n";
+    echo "\nEMPLOYEE ROSTER MENU\n";
     echo "1. ADD AN EMPLOYEE\n";
     echo "2. DISPLAY ALL EMPLOYEES\n";
     echo "3. DISPLAY COMMISSION EMPLOYEES\n";

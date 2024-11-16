@@ -11,14 +11,29 @@ class EmployeeRoster {
         $this->roster = array_fill(0, $rosterSize, null);
     }
 
+    public function employeeExists($employeeNumber) {
+        foreach ($this->roster as $employee) {
+            if ($employee !== null && $employee->getEmployeeNumber() === $employeeNumber) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function add(Employee $e) {
+        if ($this->employeeExists($e->getEmployeeNumber())) {
+            echo "Error: Employee with number " . $e->getEmployeeNumber() . " already exists.\n";
+            return false;
+        }
+
         for ($i = 0; $i < count($this->roster); $i++) {
             if ($this->roster[$i] === null) {
                 $this->roster[$i] = $e;
                 return true;
             }
         }
-        return false;  // Roster is full
+        echo "Error: Roster is full. Cannot add more employees.\n";
+        return false;
     }
 
     public function remove($employeeNumber) {
